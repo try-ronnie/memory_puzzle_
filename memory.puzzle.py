@@ -13,5 +13,17 @@ BOARDWIDTH = 10 # number of the columns of icons
 BOARDHEIGHT = 7 # number of rows of ico
 assert(BOARDWIDTH * BOARDHEIGHT) % 2 == 0 , 'board needs to have an even number of boxes for pairs of matches'
 XMARGIN = int((WINDOWWIDTH - (BOARDWIDTH * (BOXSIZE*GAPSIZE)))/2)
-YMARGIN = int((WINDOWHEIGHT- (BOARDHEIGHT *(BOXSIZE *GAPSIZE)))/2)# this calculates the margin or spcae left which the board isnt cobvering 
+YMARGIN = int((WINDOWHEIGHT- (BOARDHEIGHT *(BOXSIZE *GAPSIZE)))/2)# these 2  calculates the margin or spcae left which the board isnt cobvering 
+
+# setting up the colours to use for the game
+GRAY = (100,100,100)
+NAVYBLUE = (60 , 60 , 100)
+WHITE = (255, 255 ,255)
+RED = (255 ,0,0)
+GREEN = (0 , 255 , 0)
+BLUE = (0, 0, 255)
+YELLOW = (255, 255 , 0)
+ORANGE = (255 , 128, 0)
+PURPLE = (255 , 0 ,255)
+CYAN = (0 , 255 ,255)
 
