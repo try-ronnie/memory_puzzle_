@@ -27,3 +27,11 @@ ORANGE = (255 , 128, 0)
 PURPLE = (255 , 0 ,255)
 CYAN = (0 , 255 ,255)
 
+
+# setting up COLOUR FOR THE SURFACE 
+BGCOLOUR = NAVYBLUE # this will work for our display fill
+LIGHTBGCOLOUR = GRAY # 
+BOXCOLOUR = WHITE
+HIGHLIGHTCOLOUR = BLUE
+
+# 
