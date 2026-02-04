@@ -53,5 +53,5 @@ def main ():
     DISPLAYSURF = pygame.display.set_mode(WINDOWWIDTH, WINDOWHEIGHT)
     mouse_x = 0 # used to store the x_axis calibration of the mouse
     mouse_y = 0 # calculates the y_acis calibration
-    pygame.display.set_captiom('memory puzzle 2.0')
+    pygame.display.set_caption('memory puzzle 2.0')
     
