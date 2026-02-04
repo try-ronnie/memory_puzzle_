@@ -46,3 +46,12 @@ ALLSHAPES = (DONUT , SQUARE, DIAMOND , LINES , OVAL )
 
 assert len(ALLCOLOURS) * len(ALLSHAPES) * 2 >= BOARDHEIGHT * BOARDWIDTH , ' THE BOARD IS TOO SMALL FOR THE NUMBER OF SHAPES AND CLOURS DEFINED'
 
+def main ():
+    global FPSCLOCK , DISPLAYSURF # This is used to set this variables to be global and not consider any scoping
+    pygame.init() # to start the lib 
+    FPSCLOCK = pygame.time.Clock()  #this creates a time object that handles the timing of occurences so that the computer canuse the objects methods to keep track of time and manage it
+    DISPLAYSURF = pygame.display.set_mode(WINDOWWIDTH, WINDOWHEIGHT)
+    mouse_x = 0 # used to store the x_axis calibration of the mouse
+    mouse_y = 0 # calculates the y_acis calibration
+    pygame.display.set_captiom('memory puzzle 2.0')
+    
