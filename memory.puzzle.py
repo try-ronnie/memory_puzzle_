@@ -87,5 +87,23 @@ def main ():
                 drawHighlightBox(box_x, box_y)
             if not revealedBoxes[box_x][box_y] and mouseCLicked:
                 revealBoxesAnimation(mainBoard , [(box_x, box_y)])
-                revealedBoxes[box_x,box_y] = True
+                revealedBoxes[box_x][box_y] = True    # this means the box has been revealed upon click "set it as revealed"
+                if firstSelection == None:   # meaning that ... if this was the first box to be selected"
+                    firstSelection = (box_x , box_y)    # the current box is set as the first selection ... incase the user didnt pick any box before ... 
+                else:    # the current box was the second boxed clicked
+                    # we need now to check if the icons match
+                    icon1shape , icon1colour = getShapeAndColour(mainBoard, firstSelection[0] , firstSelection[1])
+                    icon2shape , icon2colour = getShapeAndColour(mainBoard,box_x, box_y)
+                    if icon1shape != icon2shape or icon1colour != icon2colour: # if either the colour or shapes dont match then
+                        pygame.time.wait(1000)#1000 milliseconds == 1 second ... so wait one second before continuing the commands ... (for player to remember)
+                        coverBoxesAnimation(mainBoard , [(firstSelection[0], firstSelection[1]), (box_x , box_y)]) # runs the function to cover the boxes
+                        revealedBoxes[firstSelection[0]][firstSelection[1]] = False # returns the first selection value back to flase 
+                    elif hasWon(revealedBoxes): # check if all pairs found
+                        gameWonAnimation(mainBoard)
+                        pygame.time.wait(2000) # this happens meaning that from the last selection he would win if all the pairs 
+                        
+                        #RESET THE BOARD ..... after winning
+                        mainBoard = getRandomizedBoard() # this gives a random board with random pieces and is saved as the variables main board as it will be the one used the whole game
+                        revealedBoxes = generateRevealedBoxesData(False)
+
 
