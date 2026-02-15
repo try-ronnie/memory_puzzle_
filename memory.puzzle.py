@@ -44,7 +44,7 @@ OVAL = 'oval'
 ALLCOLOURS = (RED, GREEN, BLUE,YELLOW,ORANGE, PURPLE, CYAN , GRAY, NAVYBLUE, WHITE)
 ALLSHAPES = (DONUT , SQUARE, DIAMOND , LINES , OVAL )
 
-assert len(ALLCOLOURS) * len(ALLSHAPES) * 2 >= BOARDHEIGHT * BOARDWIDTH , ' THE BOARD IS TOO SMALL FOR THE NUMBER OF SHAPES AND CLOURS DEFINED'
+assert len(ALLCOLOURS) * len(ALLSHAPES) * 2 >= BOARDHEIGHT * BOARDWIDTH , ' THE BOARD IS TOO large! FOR THE NUMBER OF SHAPES AND CLOURS DEFINED'
 
 def main ():
     global FPSCLOCK , DISPLAYSURF # This is used to set this variables to be global and not consider any scoping
@@ -54,4 +54,38 @@ def main ():
     mouse_x = 0 # used to store the x_axis calibration of the mouse
     mouse_y = 0 # calculates the y_acis calibration
     pygame.display.set_caption('memory puzzle 2.0')
+    mainBoard  = getRandomizedBoard()
+    revealedBoxes = generateRevealedBoxesData(False) # the boes come unrevealved so ofc its going to be false
+    firstSelection = None # stores the (x,y 0 of the first boxed clickedg) 
+    DISPLAYSURF.fill(BGCOLOUR)
+    startGameAnimation(mainBoard)
+    # note that we have two places for memory
+    # outside memory = this is the memory that mostly work on the structure of colours display surfaces , fps , and mostly constants required 
+    # in-game memory = this is the function thtat saves the factors experienced in the game or the game memory eg. revealvedboxes
+
     
+    while True:# this where the main game loop runs 
+        mouseCLicked = False # we set this to false since at the beginning of the nothing is pressed
+        DISPLAYSURF.fill(BGCOLOUR) #  ? why set this twice ..
+        drawBoard(mainBoard , revealedBoxes)
+
+        for event in pygame.event.get():
+            if event.type  == QUIT :
+                pygame.quit()
+                sys.exit()
+            elif event.type == MOUSEMOTION:
+                mouse_x , mouse_y = event.pos
+            elif event.type == MOUSEBUTTONUP:
+                mouse_x , mouse_y = event.pos
+                mouseCLicked = True
+                
+
+        box_x , box_y = getBoxAtPixel(mouse_x , mouse_y) # gets the box at the exact pixel postion where the mouse is hovering over (user click positioning)
+        if box_x != None and box_y != None: # means that when that the mouse is over a box .... since the values cant be none for the box pistioning and the pixels it covers
+            #the mouse is currently over a box 
+            if not revealedBoxes[box_x][box_y]: 
+                drawHighlightBox(box_x, box_y)
+            if not revealedBoxes[box_x][box_y] and mouseCLicked:
+                revealBoxesAnimation(mainBoard , [(box_x, box_y)])
+                revealedBoxes[box_x,box_y] = True
+
